@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="John Earl Conde — BSCS Student Developer Portfolio. Web Development, AI, Algorithms."/>
+  <title>John Earl Conde | BSCS Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css?v=2" />
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar" id="navbar" role="banner">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo" aria-label="JEC Portfolio Home">
+      <span class="logo-bracket">&lt;/&gt;</span> JEC.
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#algorithms" class="nav-link">Algorithms</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+        <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+      </button>
+      <a href="#contact" class="btn-letstalk" aria-label="Let's Talk">
+        Let's Talk <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-links">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero section" id="home" aria-label="Hero">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-glow-1" aria-hidden="true"></div>
+  <div class="hero-glow-2" aria-hidden="true"></div>
+
+  <div class="container hero-container">
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-badge" role="status">
+        <span class="badge-dot" aria-hidden="true"></span>
+        BSCS STUDENT &nbsp;•&nbsp; DEVELOPER &nbsp;•&nbsp; PROBLEM SOLVER
+      </div>
+      <p class="hero-eyebrow">COMPUTER SCIENCE PORTFOLIO</p>
+      <h1 class="hero-heading">
+        Building ideas into<br>
+        <span class="accent-text">digital experiences.</span>
+      </h1>
+      <h2 class="hero-role">
+        <span class="typed-text" aria-live="polite"></span><span class="cursor" aria-hidden="true">_</span>
+      </h2>
+      <p class="hero-desc">
+        I'm John Earl Conde, a BSCS student passionate about web development, software engineering, 
+        artificial intelligence, algorithms, and creating practical technology solutions.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
+      </div>
+      <div class="hero-stats" role="list">
+        <div class="hero-stat" role="listitem">
+          <span class="stat-value">BSCS</span>
+          <span class="stat-key">Degree</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat" role="listitem">
+          <span class="stat-value">10+</span>
+          <span class="stat-key">Projects</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="hero-stat" role="listitem">
+          <span class="stat-value">∞</span>
+          <span class="stat-key">Possibilities</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero-right" aria-hidden="true">
+      <div class="workstation-card">
+        <!-- Monitor -->
+        <div class="monitor">
+          <div class="monitor-screen">
+            <div class="code-editor">
+              <div class="editor-topbar">
+                <div class="editor-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <div class="editor-tabs" id="editor-tabs" role="tablist" aria-label="Example files"></div>
+                <button type="button" class="editor-run" id="editor-run" aria-label="Run the example">
+                  <i class="fas fa-play" aria-hidden="true"></i><span>Run</span>
+                </button>
+              </div>
+              <div class="editor-body">
+                <pre class="code-block code-clickable" id="editor-code-wrap" role="button" tabindex="0" aria-label="Show the next example"><code id="editor-code"><span class="code-kw">const</span> <span class="code-var">developer</span> = {
+  <span class="code-key">name</span>: <span class="code-str">"John Earl"</span>,
+  <span class="code-key">degree</span>: <span class="code-str">"BS Computer Science"</span>,
+  <span class="code-key">focus</span>: [
+    <span class="code-str">"Web Development"</span>,
+    <span class="code-str">"AI &amp; ML"</span>,
+    <span class="code-str">"Algorithms"</span>
+  ],
+  <span class="code-key">status</span>: <span class="code-str">"Building..."</span>
+};</code></pre>
+                <div class="editor-console" id="editor-console" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+          <div class="monitor-stand"></div>
+          <div class="monitor-base"></div>
+        </div>
+        <!-- Floating tech badges -->
+        <div class="tech-badges">
+          <button type="button" class="tech-badge badge-html float-1" data-tech="html5">HTML</button>
+          <button type="button" class="tech-badge badge-css float-2" data-tech="css3">CSS</button>
+          <button type="button" class="tech-badge badge-js float-3" data-tech="javascript">JS</button>
+          <button type="button" class="tech-badge badge-python float-4" data-tech="python">Python</button>
+          <button type="button" class="tech-badge badge-react float-5" data-tech="react">React</button>
+          <button type="button" class="tech-badge badge-laravel float-6" data-tech="laravel">Laravel</button>
+          <button type="button" class="tech-badge badge-mysql float-7" data-tech="mysql">MySQL</button>
+          <button type="button" class="tech-badge badge-git float-8" data-tech="git">Git</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-indicator" aria-label="Scroll to About section">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line" aria-hidden="true"></div>
+  </a>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="about section" id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="section-label reveal">01 — ABOUT ME</div>
+    <div class="about-grid">
+      <!-- Left -->
+      <div class="about-left reveal">
+        <h2 id="about-heading" class="section-heading">
+          Turning curiosity into<br>working software.
+        </h2>
+        <p class="about-desc">
+          As a Bachelor of Science in Computer Science student at Divine Word College of Legazpi, 
+          I enjoy solving problems through code and transforming concepts into useful digital products.
+        </p>
+        <p class="about-desc">
+          My interests include full-stack development, artificial intelligence, machine learning, 
+          database systems, algorithms, UI/UX design, and software engineering.
+        </p>
+        <p class="about-desc">
+          I believe good software should not only work — it should be understandable, useful, 
+          accessible, and enjoyable to use.
+        </p>
+        <div class="about-traits">
+          <div class="trait-card">
+            <div class="trait-icon"><i class="fas fa-puzzle-piece" aria-hidden="true"></i></div>
+            <div>
+              <h3 class="trait-title">Problem Solver</h3>
+              <p class="trait-desc">Algorithms, logic and optimization.</p>
+            </div>
+          </div>
+          <div class="trait-card">
+            <div class="trait-icon"><i class="fas fa-hammer" aria-hidden="true"></i></div>
+            <div>
+              <h3 class="trait-title">Builder</h3>
+              <p class="trait-desc">Web and software applications.</p>
+            </div>
+          </div>
+          <div class="trait-card">
+            <div class="trait-icon"><i class="fas fa-brain" aria-hidden="true"></i></div>
+            <div>
+              <h3 class="trait-title">AI Explorer</h3>
+              <p class="trait-desc">Machine learning and intelligent systems.</p>
+            </div>
+          </div>
+          <div class="trait-card">
+            <div class="trait-icon"><i class="fas fa-pen-ruler" aria-hidden="true"></i></div>
+            <div>
+              <h3 class="trait-title">UI Mindset</h3>
+              <p class="trait-desc">Clean and user-friendly interfaces.</p>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary" download aria-label="Download CV">
+          Download CV <i class="fas fa-download" aria-hidden="true"></i>
+        </a>
+      </div>
+      <!-- Right -->
+      <div class="about-right reveal">
+        <div class="profile-card">
+          <div class="profile-img-wrap">
+            <img src="https://cdn.phototourl.com/member/2026-10-08-256b30e6-734e-4fb9-8d9a-738d702f3056.png"
+                 alt="John Earl Conde — BSCS Student Developer"
+                 class="profile-img" />
+          </div>
+          <div class="profile-info">
+            <h3 class="profile-name">John Earl Conde</h3>
+            <p class="profile-role">BSCS Student · Developer</p>
+            <p class="profile-school">
+              <i class="fas fa-university" aria-hidden="true"></i>
+              Divine Word College of Legazpi
+            </p>
+          </div>
+          <div class="profile-tags">
+            <span class="ptag">Web Dev</span>
+            <span class="ptag">AI / ML</span>
+            <span class="ptag">Algorithms</span>
+            <span class="ptag">Open to Internship</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section class="skills section" id="skills" aria-labelledby="skills-heading">
+  <div class="container">
+    <div class="section-label reveal">02 — SKILLS</div>
+    <h2 id="skills-heading" class="section-heading reveal">My technology stack.</h2>
+    <div class="skills-grid">
+      <!-- Left: progress bars -->
+      <div class="skills-left reveal">
+        <h3 class="skills-sub">Development Skills</h3>
+        <div class="skill-bars">
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Algorithms &amp; Data Structures</span>
+              <span class="skill-pct">92%</span>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="Algorithms and Data Structures 92%">
+              <div class="skill-fill" data-width="92"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">HTML / CSS / JavaScript</span>
+              <span class="skill-pct">90%</span>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="HTML CSS JavaScript 90%">
+              <div class="skill-fill" data-width="90"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">Python</span>
+              <span class="skill-pct">88%</span>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Python 88%">
+              <div class="skill-fill" data-width="88"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">React / Vite</span>
+              <span class="skill-pct">82%</span>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="React Vite 82%">
+              <div class="skill-fill" data-width="82"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">PHP / Laravel</span>
+              <span class="skill-pct">78%</span>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="PHP Laravel 78%">
+              <div class="skill-fill" data-width="78"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta">
+              <span class="skill-name">MySQL / SQL</span>
+              <span class="skill-pct">80%</span>
+            </div>
+            <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="MySQL SQL 80%">
+              <div class="skill-fill" data-width="80"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: tech chips -->
+      <div class="skills-right reveal">
+        <h3 class="skills-sub">Technologies &amp; Tools</h3>
+        <div class="tech-grid">
+          <button type="button" class="tech-card" data-tech="html5"><i class="fab fa-html5" aria-hidden="true"></i><span>HTML5</span></button>
+          <button type="button" class="tech-card" data-tech="css3"><i class="fab fa-css3-alt" aria-hidden="true"></i><span>CSS3</span></button>
+          <button type="button" class="tech-card" data-tech="javascript"><i class="fab fa-js-square" aria-hidden="true"></i><span>JavaScript</span></button>
+          <button type="button" class="tech-card" data-tech="python"><i class="fab fa-python" aria-hidden="true"></i><span>Python</span></button>
+          <button type="button" class="tech-card" data-tech="react"><i class="fab fa-react" aria-hidden="true"></i><span>React</span></button>
+          <button type="button" class="tech-card" data-tech="vite"><i class="fas fa-bolt" aria-hidden="true"></i><span>Vite</span></button>
+          <button type="button" class="tech-card" data-tech="laravel"><i class="fab fa-laravel" aria-hidden="true"></i><span>Laravel</span></button>
+          <button type="button" class="tech-card" data-tech="php"><i class="fab fa-php" aria-hidden="true"></i><span>PHP</span></button>
+          <button type="button" class="tech-card" data-tech="mysql"><i class="fas fa-database" aria-hidden="true"></i><span>MySQL</span></button>
+          <button type="button" class="tech-card" data-tech="git"><i class="fab fa-git-alt" aria-hidden="true"></i><span>Git</span></button>
+          <button type="button" class="tech-card" data-tech="github"><i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span></button>
+          <button type="button" class="tech-card" data-tech="tailwind"><i class="fas fa-wind" aria-hidden="true"></i><span>Tailwind</span></button>
+          <button type="button" class="tech-card" data-tech="machine-learning"><i class="fas fa-robot" aria-hidden="true"></i><span>Machine Learning</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ALGORITHMS ===================== -->
+<section class="algorithms section" id="algorithms" aria-labelledby="algorithms-heading">
+  <div class="container">
+    <div class="section-label reveal">03 — ALGORITHMS</div>
+    <h2 id="algorithms-heading" class="section-heading reveal">The logic behind the work.</h2>
+    <div class="projects-grid">
+
+      <article class="project-card reveal algo-card">
+        <div class="project-top">
+          <span class="project-num">01</span>
+          <span class="algo-complexity">O(G · n · L)</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Genetic Algorithm</h3>
+          <p class="project-desc">Breeds a population of candidate solutions toward the best one. Fitness decides who survives, crossover mixes their genes, and mutation keeps the search from settling too early.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Optimization</span>
+            <span class="tag">Evolutionary</span>
+          </div>
+          <button type="button" class="project-btn algo-btn" data-algo="ga">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal algo-card">
+        <div class="project-top">
+          <span class="project-num">02</span>
+          <span class="algo-complexity">O(n · m · k)</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Ant Colony Optimization</h3>
+          <p class="project-desc">Finds routes the way ants find food. Every path leaves a pheromone trail behind, the strongest trails grow, and the weak ones evaporate away.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Swarm</span>
+            <span class="tag">Routing</span>
+          </div>
+          <button type="button" class="project-btn algo-btn" data-algo="aco">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal algo-card">
+        <div class="project-top">
+          <span class="project-num">03</span>
+          <span class="algo-complexity">O(n log n)</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Greedy Earliest Deadline First</h3>
+          <p class="project-desc">Always runs the task that is due soonest. It is the fast, simple rule that decides what gets done next in the Smart Task Manager.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Greedy</span>
+            <span class="tag">Scheduling</span>
+          </div>
+          <button type="button" class="project-btn algo-btn" data-algo="edf">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal algo-card">
+        <div class="project-top">
+          <span class="project-num">04</span>
+          <span class="algo-complexity">O(V + E)</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Topological Sort</h3>
+          <p class="project-desc">Orders a dependency graph so every task comes after the ones it needs. A cycle in the graph means the plan cannot be scheduled at all.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Graph</span>
+            <span class="tag">Dependencies</span>
+          </div>
+          <button type="button" class="project-btn algo-btn" data-algo="topo">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal algo-card">
+        <div class="project-top">
+          <span class="project-num">05</span>
+          <span class="algo-complexity">O(n · B)</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Dynamic Programming</h3>
+          <p class="project-desc">Solves the take-or-skip problem by remembering the answer to every subproblem, so no combination is ever evaluated twice.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Memoisation</span>
+            <span class="tag">Knapsack</span>
+          </div>
+          <button type="button" class="project-btn algo-btn" data-algo="dp">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </article>
+
+      <article class="project-card reveal algo-card">
+        <div class="project-top">
+          <span class="project-num">06</span>
+          <span class="algo-complexity">O((V + E) log V)</span>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Dijkstra's Shortest Path</h3>
+          <p class="project-desc">Grows outward from the start node, always expanding the cheapest frontier first, and settles each node at its true shortest distance.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Graph</span>
+            <span class="tag">Shortest Path</span>
+          </div>
+          <button type="button" class="project-btn algo-btn" data-algo="dijkstra">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section class="projects section" id="projects" aria-labelledby="projects-heading">
+  <div class="container">
+    <div class="section-label reveal">04 — PROJECTS</div>
+    <h2 id="projects-heading" class="section-heading reveal">Things I've built &amp; explored.</h2>
+    <div class="projects-grid">
+
+      <article class="project-card reveal">
+        <div class="project-top">
+          <span class="project-num">01</span>
+          <div class="project-links">
+            <a href="#" aria-label="View DivineMind project"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">DivineMind</h3>
+          <p class="project-desc">AI-powered academic analytics and decision support system designed to analyze student performance and provide intelligent recommendations.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">AI</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Analytics</span>
+            <span class="tag">Web App</span>
+          </div>
+          <a href="#" class="project-btn" aria-label="View DivineMind Case Study">View Case Study <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-top">
+          <span class="project-num">02</span>
+          <div class="project-links">
+            <a href="#" aria-label="View Smart Laptop Recommendation System project"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Smart Laptop Recommendation System</h3>
+          <p class="project-desc">A Genetic Algorithm-based recommendation system that ranks laptops according to a user's profile, budget, and computing needs.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Genetic Algorithm</span>
+            <span class="tag">CSV</span>
+            <span class="tag">Recommendation</span>
+          </div>
+          <a href="#" class="project-btn" aria-label="Explore Smart Laptop project">Explore Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-top">
+          <span class="project-num">03</span>
+          <div class="project-links">
+            <a href="#" aria-label="View Transportation Optimization project"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Transportation Optimization</h3>
+          <p class="project-desc">Research project exploring Ant Colony Optimization with adaptive local search for transportation and routing problems.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">ACO</span>
+            <span class="tag">Algorithms</span>
+            <span class="tag">Optimization</span>
+            <span class="tag">Research</span>
+          </div>
+          <a href="#" class="project-btn" aria-label="View Transportation Optimization Research">View Research <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-top">
+          <span class="project-num">04</span>
+          <div class="project-links">
+            <a href="#" aria-label="View Smart Task Manager project"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Smart Task Manager</h3>
+          <p class="project-desc">A task management application using scheduling and optimization algorithms including Greedy EDF, Priority Queue, Dynamic Programming, and Topological Sort.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Algorithms</span>
+            <span class="tag">Scheduling</span>
+            <span class="tag">Optimization</span>
+          </div>
+          <a href="#" class="project-btn" aria-label="View Smart Task Manager">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-top">
+          <span class="project-num">05</span>
+          <div class="project-links">
+            <a href="#" aria-label="View Gym Scheduler project"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Gym Scheduler</h3>
+          <p class="project-desc">A responsive gym scheduling and workout management application with routines, daily workout selection, and user-friendly UI.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Tailwind</span>
+            <span class="tag">Web App</span>
+          </div>
+          <a href="#" class="project-btn" aria-label="View Gym Scheduler">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-top">
+          <span class="project-num">06</span>
+          <div class="project-links">
+            <a href="#" aria-label="View Laravel E-Commerce project"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Laravel E-Commerce System</h3>
+          <p class="project-desc">A full-stack e-commerce application with products, orders, authentication, database management, and administrative features.</p>
+        </div>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">Laravel</span>
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">CRUD</span>
+          </div>
+          <a href="#" class="project-btn" aria-label="View Laravel E-Commerce project">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section class="education section" id="education" aria-labelledby="education-heading">
+  <div class="container">
+    <div class="section-label reveal">05 — EDUCATION</div>
+    <h2 id="education-heading" class="section-heading reveal">My learning journey.</h2>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-line" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <span class="timeline-badge">Current</span>
+            <span class="timeline-year">2022 — Present</span>
+          </div>
+          <h3 class="timeline-degree">Bachelor of Science in Computer Science</h3>
+          <p class="timeline-school">
+            <i class="fas fa-university" aria-hidden="true"></i>
+            Divine Word College of Legazpi
+          </p>
+          <div class="timeline-courses">
+            <span class="course-tag">Programming</span>
+            <span class="course-tag">Algorithms</span>
+            <span class="course-tag">Software Engineering</span>
+            <span class="course-tag">Artificial Intelligence</span>
+            <span class="course-tag">Computer Graphics</span>
+            <span class="course-tag">Database Systems</span>
+            <span class="course-tag">Networking</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <span class="timeline-badge timeline-badge-done">Foundation</span>
+            <span class="timeline-year">2020 — 2022</span>
+          </div>
+          <h3 class="timeline-degree">Computer Science Foundations</h3>
+          <p class="timeline-school">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            Core Academic Preparation
+          </p>
+          <div class="timeline-courses">
+            <span class="course-tag">Programming</span>
+            <span class="course-tag">Data Structures</span>
+            <span class="course-tag">Algorithms</span>
+            <span class="course-tag">Database Systems</span>
+            <span class="course-tag">AI / ML</span>
+            <span class="course-tag">Software Engineering</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="services section" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-label reveal">06 — WHAT I DO</div>
+    <h2 id="services-heading" class="section-heading reveal">From concept to prototype.</h2>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
+        <h3 class="service-title">Web Development</h3>
+        <p class="service-desc">Building responsive and modern web applications using clean and maintainable code.</p>
+        <div class="service-line" aria-hidden="true"></div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
+        <h3 class="service-title">Software Projects</h3>
+        <p class="service-desc">Creating practical software solutions for academic, business, and real-world problems.</p>
+        <div class="service-line" aria-hidden="true"></div>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-icon"><i class="fas fa-microchip" aria-hidden="true"></i></div>
+        <h3 class="service-title">AI &amp; Data</h3>
+        <p class="service-desc">Exploring machine learning, data analytics, recommendation systems, and intelligent applications.</p>
+        <div class="service-line" aria-hidden="true"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact section" id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="section-label reveal">07 — CONTACT</div>
+    <div class="contact-inner reveal">
+      <div class="contact-left">
+        <h2 id="contact-heading" class="contact-heading">
+          Have an idea?<br>Let's build it.
+        </h2>
+        <p class="contact-desc">
+          I'm open to academic collaborations, development projects, internships, 
+          and creative technology ideas.
+        </p>
+        <div class="contact-cards">
+          <a href="mailto:johnearlconde20@gmail.com" class="contact-card" aria-label="Email John Earl">
+            <div class="cc-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+            <div>
+              <span class="cc-label">Email</span>
+              <span class="cc-value">johnearlconde20@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://github.com/johnearl" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="GitHub Profile">
+            <div class="cc-icon"><i class="fab fa-github" aria-hidden="true"></i></div>
+            <div>
+              <span class="cc-label">GitHub</span>
+              <span class="cc-value">github.com/johnearl</span>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/johnearl" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="LinkedIn Profile">
+            <div class="cc-icon"><i class="fab fa-linkedin-in" aria-hidden="true"></i></div>
+            <div>
+              <span class="cc-label">LinkedIn</span>
+              <span class="cc-value">linkedin.com/in/johnearl</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <form class="contact-form-box" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-name">Name</label>
+              <input type="text" id="c-name" name="name" placeholder="Your name" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" name="email" placeholder="your@email.com" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="c-subject">Subject</label>
+            <input type="text" id="c-subject" name="subject" placeholder="What's this about?" />
+          </div>
+          <div class="form-group">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" name="message" rows="5" placeholder="Tell me about your project or idea..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-large" id="c-submit" style="width:100%;justify-content:center;">
+            <i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" role="contentinfo">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="#home" class="footer-logo" aria-label="JEC Portfolio">
+        <span class="logo-bracket">&lt;/&gt;</span> JEC.
+      </a>
+      <p class="footer-tagline">Building ideas into digital experiences.</p>
+      <p class="footer-school">BSCS Portfolio · Divine Word College of Legazpi</p>
+    </div>
+    <div class="footer-social">
+      <a href="https://github.com/johnearl" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a href="https://linkedin.com/in/johnearl" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+      <a href="mailto:johnearlconde20@gmail.com" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+    </div>
+    <div class="footer-copy">
+      <p>© 2026 John Earl Conde</p>
+      <p>All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js?v=2"></script>
+</body>
+</html>
