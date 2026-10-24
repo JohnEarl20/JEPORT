@@ -1,0 +1,13 @@
+# `minimal` removes the Deploy button and the hamburger menu, which otherwise sit on
+# top of the portfolio's own fixed navbar.
+[client]
+toolbarMode = "minimal"
+
+# The site boots dark (index.html ships data-theme="dark"); match it so the surrounding
+# chrome does not flash white before the iframe paints.
+[theme]
+base = "dark"
+backgroundColor = "#0b0f19"
+secondaryBackgroundColor = "#131a2b"
+textColor = "#e6ebf5"
+primaryColor = "#6c8cff"

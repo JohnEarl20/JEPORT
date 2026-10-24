@@ -1332,7 +1332,7 @@ const algorithms = [
     desc: 'A genetic algorithm searches by breeding instead of guessing. A population of candidate solutions is scored by a fitness function, the fittest are allowed to reproduce, and their genes are crossed over and mutated to produce the next generation.',
     points: [
       'Selection keeps the fittest; crossover and mutation create the next generation.',
-      'Elitism copies the best few solutions forward so a generation nevecanr gets worse.',
+      'Elitism copies the best few solutions forward so a generation never gets worse.',
       'Works on problems with no closed-form answer, at the cost of many evaluations.',
     ],
     code: `import math
