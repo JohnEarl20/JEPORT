@@ -1,1 +1,5 @@
-streamlit>=1.53
+# Upper bound on purpose: Streamlit Cloud re-resolves this on every rebuild, so an
+# unguarded ">=1.53" would silently pick up a future 2.0 with breaking changes.
+# Verified rendering on 1.53.0; the components.html / st.set_page_config API used here
+# has been stable across the whole 1.x line.
+streamlit>=1.53,<2
