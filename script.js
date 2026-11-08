@@ -1376,6 +1376,7 @@ if (editorCode && editorTabs && editorRun && editorLog && editorWrap) {
 const algorithms = [
   {
     key: 'ga', name: 'Genetic Algorithm', category: 'Optimization',
+    icon: 'fas fa-dna',
     lang: 'Python', cmd: 'python ga.py',
     out: 'generation 23 -> best fitness 84 (started at 35)',
     desc: 'A genetic algorithm searches by breeding instead of guessing. A population of candidate solutions is scored by a fitness function, the fittest are allowed to reproduce, and their genes are crossed over and mutated to produce the next generation.',
@@ -1435,6 +1436,7 @@ for generation in range(GENERATIONS):
   },
   {
     key: 'aco', name: 'Ant Colony Optimization', category: 'Swarm Intelligence',
+    icon: 'fas fa-bug',
     lang: 'Python', cmd: 'python aco.py',
     out: 'round 25 -> short route holds 60% of the pheromone',
     desc: 'Ant colony optimisation borrows its idea from real ants. An ant leaves a pheromone trail along the path it took, and because shorter paths are walked more often, the strongest trails are the ones that get reinforced.',
@@ -1469,6 +1471,7 @@ for round_number in range(ROUNDS):
   },
   {
     key: 'edf', name: 'Greedy Earliest Deadline First', category: 'Scheduling',
+    icon: 'fas fa-clock',
     lang: 'Python', cmd: 'python scheduler.py',
     out: 'total time 11, 2 missed deadlines (T4, T3)',
     desc: 'Greedy EDF always runs the task that is due soonest. It takes no account of what happens later — it simply keeps the deadline order — which makes it fast, predictable and optimal when the deadlines are known up front.',
@@ -1506,6 +1509,7 @@ print(f"total time {now}, {missed} missed")`,
   },
   {
     key: 'topo', name: 'Topological Sort', category: 'Graph Theory',
+    icon: 'fas fa-project-diagram',
     lang: 'Python', cmd: 'python deps.py',
     out: 'valid order -> design, assets, build, test, docs, deploy',
     desc: 'A topological sort orders a dependency graph so every node comes after the ones it depends on. It is what turns a list of tangled tasks into a sequence that can actually be executed.',
@@ -1553,6 +1557,7 @@ else:
   },
   {
     key: 'dp', name: 'Dynamic Programming', category: 'Optimisation',
+    icon: 'fas fa-table-cells',
     lang: 'Python', cmd: 'python dp.py',
     out: 'best reward 28 with a budget of 10, chose D, B, A',
     desc: 'Dynamic programming breaks a problem into overlapping subproblems and stores the answer to each one. The second time the same subproblem is asked, the stored answer is returned instead of being recomputed.',
@@ -1600,6 +1605,7 @@ print("chosen: " + ", ".join(chosen))`,
   },
   {
     key: 'dijkstra', name: "Dijkstra's Shortest Path", category: 'Graph Theory',
+    icon: 'fas fa-route',
     lang: 'Python', cmd: 'python route.py',
     out: 'A(0) C(2) B(4) D(9) E(12) F(14)',
     desc: 'Dijkstra grows outward from the start node and always expands the cheapest known frontier first. Because every node is settled at its true shortest distance the moment it is popped, the first time the goal is reached the answer is final.',
@@ -1752,38 +1758,26 @@ const algoModalHTML = `
 
 document.body.insertAdjacentHTML('beforeend', algoModalHTML);
 
-const algoModal      = document.getElementById('algo-modal');
-const algoModalClose = document.getElementById('amodal-close');
-const algoModalRun   = document.getElementById('amodal-run');
-const algoModalCopy  = document.getElementById('amodal-copy');
-const algoModalCode  = document.getElementById('amodal-code');
-const algoModalOut   = document.getElementById('amodal-out');
-const algoEditor     = document.getElementById('amodal-editor');
-const algoPvView     = document.getElementById('amodal-py-view');
-const algoJsView     = document.getElementById('amodal-js-view');
-const algoTabs       = document.querySelectorAll('.amodal-tab');
+const algoModal       = document.getElementById('algo-modal');
+const algoModalClose  = document.getElementById('amodal-close');
+const algoModalTitle  = document.getElementById('amodal-title');
+const algoModalIcon   = document.getElementById('amodal-icon');
+const algoModalDesc   = document.getElementById('amodal-desc');
+const algoModalPoints = document.getElementById('amodal-points');
+const algoModalTabs   = document.getElementById('amodal-tabs');
+const algoEditor      = document.getElementById('amodal-code');
 let activeAlgo = null;
-let activeTab = 'py';
-
-function setTab(tab) {
-  activeTab = tab;
-  algoPvView.hidden = tab !== 'py';
-  algoJsView.hidden = tab !== 'js';
-  algoTabs.forEach((t) => {
-    const on = t.dataset.tab === tab;
-    t.classList.toggle('is-active', on);
-    t.setAttribute('aria-selected', String(on));
-  });
-  if (tab === 'js') algoEditor.focus();
-}
 
 function printAlgoOut(lines) {
-  algoModalOut.textContent = '';
+  // Find output container in the modal
+  const outContainer = document.getElementById('amodal-out');
+  if (!outContainer) return;
+  outContainer.textContent = '';
   lines.forEach(({ cls, text }) => {
     const span = document.createElement('span');
     span.className = cls;
     span.textContent = text;
-    algoModalOut.appendChild(span);
+    outContainer.appendChild(span);
   });
 }
 
@@ -1791,11 +1785,9 @@ function writeAlgoOut(algo) {
   printAlgoOut([
     { cls: 'editor-cmd', text: '$ ' + algo.cmd },
     { cls: 'editor-out', text: algo.out },
-    { cls: 'editor-note', text: 'Switch to "Editable & runnable" to change the real code and run it.' },
+    { cls: 'editor-note', text: 'Edit the code and press Ctrl/Cmd+Enter to run.' },
   ]);
 }
-
-algoTabs.forEach((t) => t.addEventListener('click', () => setTab(t.dataset.tab)));
 
 let algoModalTimer = null;
 
@@ -1806,22 +1798,15 @@ function openAlgoModal(key) {
   if (!algo) return;
   activeAlgo = algo;
 
-  document.getElementById('amodal-title').textContent  = algo.name;
-  document.getElementById('amodal-kicker').textContent = algo.category;
-  document.getElementById('amodal-desc').textContent   = algo.desc;
-  document.getElementById('amodal-lang').textContent   = algo.lang;
-  document.getElementById('amodal-points').innerHTML   = algo.points.map(p => `<li>${p}</li>`).join('');
-  algoModalCode.innerHTML = highlightCode(algo.code, algo.lang);
-
-  // the editor starts from the working source of this algorithm
-  const pg = algoPlayground[algo.key];
-  algoEditor.value = pg ? pg.code : '';
+  algoModalTitle.textContent  = algo.name;
+  algoModalIcon.innerHTML     = `<i class="${algo.icon || 'fas fa-diagram-project'}"></i>`;
+  algoModalDesc.textContent   = algo.desc;
+  algoModalPoints.innerHTML   = algo.points.map(p => `<li>${p}</li>`).join('');
 
   algoModal.hidden = false;
-  algoModal.classList.add('tmodal-open');
+  algoModal.classList.add('amodal-open');
   document.body.style.overflow = 'hidden';
 
-  setTab('py');
   writeAlgoOut(algo);
   startViz(algo.key);
 
@@ -1829,7 +1814,7 @@ function openAlgoModal(key) {
 }
 
 function closeAlgoModal() {
-  algoModal.classList.remove('tmodal-open');
+  algoModal.classList.remove('amodal-open');
   clearTimeout(algoModalTimer);
   algoModalTimer = setTimeout(() => { algoModal.hidden = true; }, 280);
   document.body.style.overflow = '';
@@ -1842,17 +1827,6 @@ function closeAlgoModal() {
 algoModalClose.addEventListener('click', closeAlgoModal);
 algoModal.addEventListener('click', (e) => { if (e.target === algoModal) closeAlgoModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !algoModal.hidden) closeAlgoModal(); });
-
-algoModalRun.addEventListener('click', runPlaygroundUI);
-
-algoModalCopy.addEventListener('click', () => {
-  if (!activeAlgo) return;
-  // copy whichever panel is showing
-  const text = activeTab === 'js' ? algoEditor.value : activeAlgo.code;
-  copyText(text)
-    .then(() => showToast(`${activeAlgo.name} ${activeTab === 'js' ? 'JavaScript' : 'reference'} copied`, 'success'))
-    .catch(() => showToast('Copy failed — select the code manually', 'error'));
-});
 
 // Tab indentation and Ctrl/Cmd+Enter inside the editor
 algoEditor.addEventListener('keydown', (e) => {
