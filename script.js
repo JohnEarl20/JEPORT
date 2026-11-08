@@ -1385,6 +1385,7 @@ const algorithms = [
       'Elitism copies the best few solutions forward so a generation never gets worse.',
       'Works on problems with no closed-form answer, at the cost of many evaluations.',
     ],
+    explainer: `Ang Genetic Algorithm ay nire-replicate ang natural na selection. Gumagawa ito ng population ng mga kandidato (hal. 24 numbers), tapos in-evaluate ang bawat isa gamit ang fitness function (gaano kalapit sa target). Ang mga pinakamabuting kandidato (elite) ay directly na kopya sa susunod na generation. Ang iba ay binubuo sa pamamagitan ng crossover (average ng dalawang parent) at mutation (random na pagbabago). Uulit ito hanggang sa umabot sa target o matapos ang generations. Ginamit ko ito sa Smart Laptop Recommendation System para hanapin ang best laptop config sa ilalim ng budget.`,
     code: `import math
 
 TARGET = 92
@@ -1445,6 +1446,7 @@ for generation in range(GENERATIONS):
       'The deposit is inversely proportional to route length — shorter paths leave stronger trails.',
       'Applies to any graph: road networks, delivery routes, machine scheduling.',
     ],
+    explainer: `Ang ACO ay inspired sa behavior ng tunay na langgam. Kapag naghahanap ng pagkain, iniwanan nila ng pheromone (chemical trail) ang dinaraanan nilang path. Ang mas maikling path ay mas madalas madaanan, kaya mas maraming pheromone ang naka-deposit dito. Bawat round, evaporate ang pheromone (evaporation rate), tapos dagdagan ng bagong pheromone base sa dami ng ants na dumaan. Mas maikli ang route = mas maraming pheromone per ant. Ginamit ko ito sa Transportation Optimization research para sa routing problems.`,
     code: `ANT_COUNT = 14
 ROUNDS = 26
 EVAPORATION = 0.12
@@ -1480,6 +1482,7 @@ for round_number in range(ROUNDS):
       'Optimal when every task is unit length and every deadline is known in advance.',
       'The fast pre-pass that runs before the dynamic programming pass in the task manager.',
     ],
+    explainer: `Ang EDF (Earliest Deadline First) ay simple greedy scheduler. Ino-order lang ang tasks by deadline (soonest first), tapos i-run nang sunod-sunod. Hindi na ito isipin kung anong mangyayari sa mga susunod — basta yung earliest deadline, unahin. Optimal ito kung same length ang tasks at alam lahat ng deadline mula sa simula. Ginamit ko ito bilang fast pre-pass sa Smart Task Manager bago patakbuhin ang Dynamic Programming para sa optimal schedule.`,
     code: `tasks = [
     {"name": "T1", "duration": 2, "deadline": 5},
     {"name": "T2", "duration": 1, "deadline": 3},
@@ -1518,6 +1521,7 @@ print(f"total time {now}, {missed} missed")`,
       'A cycle is detected when the queue empties before every node is emitted.',
       'Gives a valid execution order for the build and task pipelines.',
     ],
+    explainer: `Ang Topological Sort (Kahn's algorithm) ay nag-o-order ng dependency graph. Unang hanapin ang lahat ng nodes na walang prerequisites (indegree = 0), ilagay sa queue. Habang may laman ang queue, alisin ang node, idagdag sa order, tapos bawasan ang indegree ng mga dependents niya. Kung umabot sa zero ang indegree ng dependent, idagdag sa queue. Kung maubos ang queue pero hindi pa lahat ng nodes na-process, may cycle ang graph (impossible i-schedule). Ginamit ko ito sa Smart Task Manager para i-order ang tasks na may dependencies.`,
     code: `from collections import deque
 
 # adjacency list: each node points at the nodes that depend on it
@@ -1566,6 +1570,7 @@ else:
       'Turns an exponential search into a polynomial one by never repeating work.',
       'The backbone of the optimal schedule calculation in the task manager.',
     ],
+    explainer: `Ang Dynamic Programming (DP) ay technique na hinahati ang problem sa mga subproblems, tapos ini-save (memoize) ang sagot ng bawat subproblem. Sa halimbawang knapsack: table[i][b] = best reward gamit ang first i tasks at budget b. Para sa bawat cell, dalawang choice: skip ang task (copy from table[i-1][b]) o take ang task (reward + table[i-1][b-cost]). Kinuha ang max. Pag tapos, trace back from table[n][budget] para malaman kung aling tasks ang pinili. Ginamit ko ito sa Smart Task Manager para optimal scheduling.`,
     code: `BUDGET = 10
 
 # each task: what it costs and what it is worth
@@ -1614,6 +1619,7 @@ print("chosen: " + ", ".join(chosen))`,
       'Correct for non-negative edge weights.',
       'Forms the core of the routing side of the transportation research.',
     ],
+    explainer: `Ang Dijkstra's algorithm ay naghahanap ng shortest path mula sa start node patungo sa lahat ng ibang nodes. Gumagamit ito ng min-heap (priority queue) para laging kunin ang node na pinakamalapit (cheapest known distance). Kapag na-pop ang node sa heap, final na ang distance niya — walang ibang path ang mas maikli dahil non-negative ang edges. I-relax ang neighbors: kung mas maikli ang new path (current distance + edge weight), i-update ang distance at i-push sa heap. Ginamit ko ito sa Transportation Optimization research para sa routing.`,
     code: `import heapq
 
 START = "A"
@@ -1803,6 +1809,12 @@ function openAlgoModal(key) {
   algoModalDesc.textContent   = algo.desc;
   algoModalPoints.innerHTML   = algo.points.map(p => `<li>${p}</li>`).join('');
 
+  // Set explainer text
+  const explainerText = document.getElementById('amodal-explainer-text');
+  if (explainerText && algo.explainer) {
+    explainerText.innerHTML = algo.explainer.split('\n').map(line => `<p>${line}</p>`).join('');
+  }
+
   algoModal.hidden = false;
   algoModal.classList.add('amodal-open');
   document.body.style.overflow = 'hidden';
@@ -1827,6 +1839,18 @@ function closeAlgoModal() {
 algoModalClose.addEventListener('click', closeAlgoModal);
 algoModal.addEventListener('click', (e) => { if (e.target === algoModal) closeAlgoModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !algoModal.hidden) closeAlgoModal(); });
+
+// Explainer toggle
+const explainerToggle = document.getElementById('amodal-explainer-toggle');
+const explainerContent = document.getElementById('amodal-explainer-content');
+if (explainerToggle && explainerContent) {
+  explainerToggle.addEventListener('click', () => {
+    const expanded = explainerToggle.getAttribute('aria-expanded') === 'true';
+    explainerToggle.setAttribute('aria-expanded', String(!expanded));
+    explainerContent.hidden = expanded;
+    explainerToggle.querySelector('i').className = expanded ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+  });
+}
 
 // Tab indentation and Ctrl/Cmd+Enter inside the editor
 algoEditor.addEventListener('keydown', (e) => {

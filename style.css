@@ -2068,6 +2068,53 @@ body::before{
 .amodal-out .editor-err { display: block; color: #f87171; }
 .amodal-out .editor-note { display: block; color: var(--muted); font-style: italic; }
 
+/* Explainer section */
+.amodal-explainer {
+  margin-top: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.amodal-explainer-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,.2);
+  cursor: pointer;
+  user-select: none;
+}
+.amodal-explainer-title {
+  font-size: .85rem; font-weight: 700; color: var(--text);
+}
+.amodal-explainer-toggle {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  color: var(--muted);
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: .7rem;
+  transition: var(--t);
+}
+.amodal-explainer-toggle:hover { color: var(--accent); border-color: rgba(114,246,196,.4); }
+.amodal-explainer-content {
+  padding: 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s var(--ease), padding .3s var(--ease);
+}
+.amodal-explainer-content:not([hidden]) {
+  max-height: 500px;
+  padding: 16px;
+}
+.amodal-explainer-text {
+  font-size: .82rem; line-height: 1.75; color: var(--muted);
+}
+.amodal-explainer-text p { margin-bottom: 10px; }
+.amodal-explainer-text p:last-child { margin-bottom: 0; }
+.amodal-explainer-text strong { color: var(--accent); }
+
 /* Responsive */
 @media (max-width: 1024px) {
   .amodal-box { padding: 32px 24px; }
