@@ -344,7 +344,9 @@
             <span class="tag">Optimization</span>
             <span class="tag">Evolutionary</span>
           </div>
+          <div class="algo-icon"><i class="fas fa-dna"></i></div>
           <button type="button" class="project-btn algo-btn" data-algo="ga">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          <div class="algo-preview">population: 24 · generations: 24 · mutation: 6%</div>
         </div>
       </article>
 
@@ -362,7 +364,9 @@
             <span class="tag">Swarm</span>
             <span class="tag">Routing</span>
           </div>
+          <div class="algo-icon"><i class="fas fa-bug"></i></div>
           <button type="button" class="project-btn algo-btn" data-algo="aco">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          <div class="algo-preview">ants: 14 · rounds: 26 · evaporation: 12%</div>
         </div>
       </article>
 
@@ -380,7 +384,9 @@
             <span class="tag">Greedy</span>
             <span class="tag">Scheduling</span>
           </div>
+          <div class="algo-icon"><i class="fas fa-clock"></i></div>
           <button type="button" class="project-btn algo-btn" data-algo="edf">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          <div class="algo-preview">6 tasks · sorted by deadline · pre-pass for DP</div>
         </div>
       </article>
 
@@ -398,7 +404,9 @@
             <span class="tag">Graph</span>
             <span class="tag">Dependencies</span>
           </div>
+          <div class="algo-icon"><i class="fas fa-project-diagram"></i></div>
           <button type="button" class="project-btn algo-btn" data-algo="topo">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          <div class="algo-preview">6 nodes · Kahn's algorithm · cycle detection</div>
         </div>
       </article>
 
@@ -416,7 +424,9 @@
             <span class="tag">Memoisation</span>
             <span class="tag">Knapsack</span>
           </div>
+          <div class="algo-icon"><i class="fas fa-table-cells"></i></div>
           <button type="button" class="project-btn algo-btn" data-algo="dp">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          <div class="algo-preview">5 tasks · budget 10 · table: 6 × 11 cells</div>
         </div>
       </article>
 
@@ -434,7 +444,9 @@
             <span class="tag">Graph</span>
             <span class="tag">Shortest Path</span>
           </div>
+          <div class="algo-icon"><i class="fas fa-route"></i></div>
           <button type="button" class="project-btn algo-btn" data-algo="dijkstra">See the code <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+          <div class="algo-preview">6 nodes · 7 edges · min-heap frontier</div>
         </div>
       </article>
 
@@ -765,6 +777,68 @@
     </div>
   </div>
 </footer>
+
+<!-- ===================== ALGORITHM MODALS ===================== -->
+<div id="algo-modal" class="amodal-overlay" role="dialog" aria-modal="true" aria-labelledby="amodal-title" hidden>
+  <div class="amodal-box">
+    <button type="button" class="amodal-close" id="amodal-close" aria-label="Close modal">
+      <i class="fas fa-xmark"></i>
+    </button>
+    <div class="amodal-head">
+      <span class="amodal-icon" id="amodal-icon"></span>
+      <div>
+        <span class="amodal-kicker">Algorithm</span>
+        <h2 class="amodal-title" id="amodal-title"></h2>
+      </div>
+    </div>
+    <div class="amodal-complexity" id="amodal-complexity"></div>
+    <p class="amodal-desc" id="amodal-desc"></p>
+    <ul class="amodal-points" id="amodal-points"></ul>
+
+    <div class="amodal-viz" id="amodal-viz">
+      <div class="amodal-vizbar">
+        <span class="amodal-vizstatus" id="amodal-vizstatus">Ready</span>
+        <div class="amodal-controls" id="amodal-controls">
+          <button type="button" class="amodal-ctrl" id="amodal-prev" aria-label="Previous step" title="Previous step"><i class="fas fa-step-backward"></i></button>
+          <button type="button" class="amodal-ctrl" id="amodal-play" aria-label="Play/Pause" title="Play/Pause"><i class="fas fa-play"></i></button>
+          <button type="button" class="amodal-ctrl" id="amodal-next" aria-label="Next step" title="Next step"><i class="fas fa-step-forward"></i></button>
+          <button type="button" class="amodal-ctrl" id="amodal-reset" aria-label="Reset" title="Reset"><i class="fas fa-rotate"></i></button>
+          <div class="amodal-speed">
+            <span>Speed</span>
+            <input type="range" id="amodal-speed" min="1" max="10" value="5" step="1" aria-label="Animation speed">
+            <span class="amodal-speedval" id="amodal-speedval">5x</span>
+          </div>
+          <div class="amodal-zoom">
+            <button type="button" class="amodal-ctrl" id="amodal-zoom-in" aria-label="Zoom in" title="Zoom in"><i class="fas fa-search-plus"></i></button>
+            <button type="button" class="amodal-ctrl" id="amodal-zoom-out" aria-label="Zoom out" title="Zoom out"><i class="fas fa-search-minus"></i></button>
+            <span class="amodal-zoomval" id="amodal-zoomval">100%</span>
+            <button type="button" class="amodal-ctrl" id="amodal-zoom-reset" aria-label="Reset zoom" title="Reset zoom"><i class="fas fa-expand"></i></button>
+          </div>
+        </div>
+      </div>
+      <canvas id="amodal-canvas" aria-label="Algorithm visualization"></canvas>
+    </div>
+
+    <div class="amodal-steps" id="amodal-steps">
+      <div class="amodal-stephead">
+        <span class="amodal-stepcount" id="amodal-stepcount">Step 0 / 0</span>
+        <span class="amodal-steptitle" id="amodal-steptitle"></span>
+      </div>
+      <p class="amodal-stepbody" id="amodal-stepbody"></p>
+      <div class="amodal-stepnav">
+        <button type="button" class="amodal-stepbtn" id="amodal-step-prev" aria-label="Previous step"><i class="fas fa-chevron-left"></i> Prev</button>
+        <button type="button" class="amodal-stepbtn" id="amodal-step-next" aria-label="Next step">Next <i class="fas fa-chevron-right"></i></button>
+        <span class="amodal-stepnote" id="amodal-stepnote"></span>
+      </div>
+    </div>
+
+    <div class="amodal-tabs" id="amodal-tabs" role="tablist" aria-label="View modes"></div>
+    <div class="amodal-editor" id="amodal-editor" role="tabpanel">
+      <textarea id="amodal-code" aria-label="Algorithm source code" spellcheck="false"></textarea>
+      <p class="amodal-editor-hint">Press <strong>Ctrl/Cmd + Enter</strong> to run • <strong>Escape</strong> to close modal</p>
+    </div>
+  </div>
+</div>
 
 <script src="script.js?v=2"></script>
 </body>

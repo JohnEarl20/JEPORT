@@ -633,8 +633,66 @@ body::before{
   border:1px solid rgba(123,140,255,.18);
   padding:4px 10px;border-radius:6px;
 }
-.algo-card{cursor:pointer}
-.algo-btn{padding:0;font-family:inherit;background:none;border:none;cursor:pointer}
+.algo-card{
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.algo-card::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(114,246,196,.06),transparent 70%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.algo-card::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent-2),var(--accent));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+.algo-card:hover{
+  transform:translateY(-7px);
+  box-shadow:var(--shadow-lg);
+  border-color:rgba(114,246,196,.2);
+  background:var(--surface-3);
+}
+.algo-card:hover::before{opacity:1}
+.algo-card:hover::after{transform:scaleX(1)}
+
+.algo-btn{
+  padding:0;font-family:inherit;background:none;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:.82rem;font-weight:700;color:var(--accent);
+  transition:gap .2s;
+}
+.algo-btn:hover{gap:12px}
+
+.algo-icon{
+  width:40px;height:40px;flex-shrink:0;
+  background:var(--accent-dim);
+  border:1px solid rgba(114,246,196,.15);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);font-size:1rem;
+  transition:var(--t);
+}
+.algo-card:hover .algo-icon{
+  background:rgba(114,246,196,.2);
+  box-shadow:0 0 16px rgba(114,246,196,.15);
+}
+
+.algo-preview{
+  font-family:var(--font-mono);font-size:.65rem;
+  color:var(--dim);margin-top:8px;padding:8px 12px;
+  background:rgba(255,255,255,.02);border-radius:6px;
+  border:1px solid var(--border);
+  opacity:0;transform:translateY(4px);transition:var(--t);
+}
+.algo-card:hover .algo-preview{
+  opacity:1;transform:none;
+}
 
 /* ============================================================
    PROJECTS
@@ -1619,4 +1677,413 @@ body::before{
   .tmodal-icon { width: 44px; height: 44px; font-size: 1.2rem; }
   .tmodal-title { font-size: 1.25rem; }
   .amodal-viz canvas { height: 150px; }
+}
+
+/* ============================================================
+   ALGORITHM MODAL — enhanced 3D visualization
+============================================================ */
+.amodal-overlay {
+  position: fixed; inset: 0; z-index: 9600;
+  background: rgba(7,9,15,.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; transition: opacity .3s var(--ease);
+}
+.amodal-overlay.amodal-open { opacity: 1; }
+.amodal-overlay[hidden] { display: none !important; }
+
+.amodal-box {
+  background: var(--surface);
+  border: 1px solid var(--border-h);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  max-width: 1100px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 40px 100px rgba(0,0,0,.8);
+  transform: translateY(24px) scale(.97);
+  transition: transform .3s var(--spring);
+}
+.amodal-open .amodal-box { transform: translateY(0) scale(1); }
+
+.amodal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--muted); font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--t);
+}
+.amodal-close:hover {
+  border-color: #f87171; color: #f87171;
+  background: rgba(248,113,113,.08);
+}
+
+.amodal-head {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 20px; padding-right: 50px;
+}
+.amodal-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(114,246,196,.25);
+}
+.amodal-kicker {
+  display: block;
+  font-family: var(--font-mono); font-size: .64rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 5px;
+}
+.amodal-title {
+  font-size: 1.6rem; font-weight: 900; letter-spacing: -.5px;
+  color: var(--text);
+}
+.amodal-complexity {
+  font-family: var(--font-mono); font-size: .65rem; font-weight: 600;
+  color: var(--accent-2); letter-spacing: 1px;
+  background: var(--accent-2-dim);
+  border: 1px solid rgba(123,140,255,.18);
+  padding: 4px 10px; border-radius: 6px;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+.amodal-desc {
+  font-size: .95rem; color: var(--muted); line-height: 1.85;
+  margin-bottom: 24px;
+}
+.amodal-points {
+  list-style: none; display: flex; flex-direction: column;
+  gap: 11px; margin-bottom: 28px;
+}
+.amodal-points li {
+  position: relative; padding-left: 24px;
+  font-size: .88rem; color: var(--muted); line-height: 1.65;
+}
+.amodal-points li::before {
+  content: ''; position: absolute; left: 3px; top: .6em;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(114,246,196,.6);
+}
+
+/* Code tabs */
+.amodal-codewrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+.amodal-codebar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,.2);
+}
+.amodal-lang {
+  font-family: var(--font-mono); font-size: .66rem; font-weight: 700;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--muted);
+}
+.amodal-btns { display: flex; align-items: center; gap: 8px; }
+.amodal-copy,
+.amodal-run {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: .64rem; font-weight: 700;
+  padding: 4px 10px; border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: var(--t);
+}
+.amodal-copy {
+  color: var(--muted);
+}
+.amodal-copy:hover {
+  color: var(--accent);
+  border-color: rgba(114,246,196,.3);
+  background: var(--accent-dim);
+}
+.amodal-run {
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-color: rgba(114,246,196,.22);
+}
+.amodal-run:hover {
+  background: rgba(114,246,196,.18);
+  box-shadow: 0 0 14px rgba(114,246,196,.25);
+}
+.amodal-run i { font-size: .55rem; }
+
+.amodal-tabs {
+  display: flex; gap: 4px;
+  padding: 8px 12px 0;
+  background: rgba(0,0,0,.25);
+}
+.amodal-tab {
+  font-family: var(--font-mono); font-size: .62rem; font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: var(--t);
+}
+.amodal-tab:hover { color: var(--text); }
+.amodal-tab.is-active {
+  color: var(--accent);
+  background: rgba(0,0,0,.45);
+  border-color: var(--border);
+}
+
+.amodal-code-view {
+  margin: 0; padding: 16px 18px;
+  overflow-x: auto;
+  font-family: var(--font-mono); font-size: .78rem; line-height: 1.85;
+  color: var(--text);
+}
+.amodal-code-view code { font-family: inherit; }
+
+.amodal-editor-panel {
+  background: rgba(0,0,0,.45);
+  border-top: 1px solid var(--border);
+  display: none;
+}
+.amodal-editor-panel.active { display: block; }
+.amodal-editor-panel textarea {
+  display: block; width: 100%;
+  min-height: 280px; max-height: 46vh;
+  padding: 14px 16px;
+  font-family: var(--font-mono); font-size: .68rem; line-height: 1.7;
+  color: #c9d6e4;
+  background: transparent;
+  border: none; outline: none; resize: vertical;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+}
+.amodal-editor-panel textarea:focus { background: rgba(114,246,196,.02); }
+.amodal-editor-hint {
+  margin: 0; padding: 0 16px 12px;
+  font-size: .6rem; color: var(--muted);
+}
+.amodal-editor-hint strong { color: var(--accent); font-weight: 600; }
+
+/* Live simulation canvas */
+.amodal-viz {
+  margin-top: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.amodal-vizbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,.2);
+  flex-wrap: wrap; gap: 10px;
+}
+.amodal-viz-label {
+  font-family: var(--font-mono); font-size: .66rem; font-weight: 700;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--muted);
+}
+.amodal-viz-status {
+  font-family: var(--font-mono); font-size: .62rem; color: var(--accent);
+}
+.amodal-viz canvas {
+  display: block; width: 100%;
+  height: clamp(300px, 48vh, 500px);
+  cursor: grab; touch-action: none;
+}
+.amodal-viz canvas:active { cursor: grabbing; }
+
+/* Design picker */
+.amodal-designs {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 10px 14px 0;
+}
+.amodal-design {
+  font-family: var(--font-mono); font-size: .6rem; font-weight: 600;
+  color: var(--muted);
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 11px;
+  transition: var(--t);
+  cursor: pointer;
+}
+.amodal-design:hover { color: var(--text); border-color: rgba(114,246,196,.35); }
+.amodal-design.is-active {
+  color: #06251b;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Step-by-step explanation */
+.amodal-steps {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,.14);
+}
+.amodal-stephead {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-bottom: 6px; flex-wrap: wrap;
+}
+.amodal-stepcount {
+  font-family: var(--font-mono); font-size: .6rem;
+  color: var(--accent); letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.amodal-steptitle {
+  font-size: .8rem; font-weight: 600; color: var(--text);
+}
+.amodal-stepbody {
+  font-size: .73rem; line-height: 1.65; color: var(--muted);
+  margin: 0 0 10px;
+}
+.amodal-stepnav {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.amodal-stepbtn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px;
+  font-family: var(--font-mono); font-size: .6rem;
+  color: var(--muted);
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--t);
+}
+.amodal-stepbtn:hover:not(:disabled) { color: var(--accent); border-color: rgba(114,246,196,.4); }
+.amodal-stepbtn:disabled { opacity: .4; cursor: default; }
+.amodal-stepnote {
+  font-size: .58rem; color: var(--dim, #64748b);
+  font-family: var(--font-mono);
+}
+.amodal-steplist {
+  list-style: none; margin: 10px 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 5px;
+  max-height: 96px; overflow-y: auto;
+}
+.amodal-stepitem {
+  font-family: var(--font-mono); font-size: .58rem;
+  padding: 3px 8px; border-radius: 5px;
+  color: var(--dim, #64748b);
+  background: rgba(255,255,255,.03);
+  border: 1px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: var(--t);
+}
+.amodal-stepitem:hover { color: var(--accent); border-color: rgba(114,246,196,.3); }
+.amodal-stepitem.is-current {
+  color: var(--accent);
+  background: rgba(114,246,196,.1);
+  border-color: rgba(114,246,196,.45);
+}
+
+/* Playback controls */
+.amodal-controls {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px 12px;
+  border-top: 1px solid var(--border);
+}
+.amodal-ctrl {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  color: var(--muted);
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: .7rem;
+  transition: var(--t);
+  cursor: pointer;
+}
+.amodal-ctrl:hover { color: var(--accent); border-color: rgba(114,246,196,.4); }
+.amodal-speed {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .62rem; color: var(--muted);
+  margin-left: auto;
+}
+.amodal-speed i { font-size: .65rem; color: var(--accent); }
+.amodal-speed input[type=range] {
+  width: 110px; height: 3px;
+  -webkit-appearance: none; appearance: none;
+  background: rgba(255,255,255,.14);
+  border-radius: 2px; outline: none; cursor: pointer;
+}
+.amodal-speed input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--surface-2);
+  cursor: pointer;
+}
+.amodal-speed input[type=range]::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--surface-2); cursor: pointer;
+}
+.amodal-speedval {
+  font-family: var(--font-mono); font-size: .62rem; color: var(--accent);
+  min-width: 34px; text-align: right;
+}
+/* Zoom group */
+.amodal-zoom {
+  display: flex; align-items: center; gap: 6px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
+}
+.amodal-zoomval {
+  font-family: var(--font-mono); font-size: .62rem; color: var(--accent);
+  min-width: 38px; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.amodal-drag-hint {
+  font-size: .58rem; color: var(--dim, #64748b);
+  font-family: var(--font-mono);
+  width: 100%;
+}
+
+/* Output console */
+.amodal-out {
+  margin-top: 16px; padding-top: 13px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  font-family: var(--font-mono); font-size: .65rem; line-height: 1.75;
+}
+.amodal-out .editor-cmd { display: block; color: var(--muted); }
+.amodal-out .editor-out { display: block; color: #fbbf24; }
+.amodal-out .editor-ok { display: block; color: var(--accent); }
+.amodal-out .editor-err { display: block; color: #f87171; }
+.amodal-out .editor-note { display: block; color: var(--muted); font-style: italic; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .amodal-box { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  .amodal-box { padding: 28px 20px; max-height: 95vh; }
+  .amodal-viz canvas { height: 280px; }
+  .amodal-controls { flex-wrap: wrap; }
+  .amodal-speed { margin-left: 0; width: 100%; }
+  .amodal-zoom { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 10px; width: 100%; }
+}
+@media (max-width: 640px) {
+  .amodal-box { padding: 24px 16px; }
+  .amodal-head { gap: 12px; }
+  .amodal-icon { width: 48px; height: 48px; font-size: 1.2rem; }
+  .amodal-title { font-size: 1.3rem; }
+  .amodal-viz canvas { height: 220px; }
+  .amodal-code-view { font-size: .7rem; }
 }
